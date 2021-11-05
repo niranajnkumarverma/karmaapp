@@ -1,0 +1,113 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Order Details</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="{% url 'index' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="{% url 'index' %}">Continoue Shoping</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Cart Area =================-->
+
+{% csrf_token %}
+{% csrf_token %}
+{% if messages %}
+{% for msg in messages %}
+<p class="text-success">{{msg}}</p>
+{% endfor %}
+{% endif %}
+<div class="row">
+    <div class="col-md-8 recipt-sec padding-30 mb-xl-30">
+        <h3>Your Orders: {{cart_data.total_cart}}</h3>
+        <div class="table-responsive table-striped">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Qunantity</th>
+                        <th>Total</th>
+                        <th class="remove-item">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cart in cart_data.cart %}
+                    <tr>
+                        <td data-title="Product">
+                            <div class="cart-product">
+                                <img src="{{cart.product.image.url}}" style="height: 30px;" alt="prod1">
+                                <div class="cart-product-body">
+                                    <h6> <a href="#">{{cart.product.name}}</a></h6>
+
+                                </div>
+                            </div>
+                        </td>
+                        <td data-title="Price"> <strong><i class="fa fa-rupee-sign"></i>
+                                {{cart.product.price}}</strong> </td>
+                        <td class="quantity" data-title="quantity">
+                            <form method="POST" action="{% url 'update_cart' pk=cart.pk %}" onchange="this.submit();">
+                                {% csrf_token %}
+                                <input type="number" name="qty" min="1" max="10" class="qty form-control"
+                                    value="{{cart.quantity}}">
+                            </form>
+                        </td>
+                        <td data-title="Total">
+                            <strong><i class="fa fa-rupee-sign"></i> {{cart.total}}</strong>
+                        </td>
+                        <td class="remove text-center">
+                            <a href="{% url 'delete_cart' pk=cart.id %}" class="text-dark-white text-danger h5">
+                                <i class="far fa-trash-alt"></i> Delete </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="recipt-sec padding-30 mb-0">
+            <h3>Cart Total</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Subtotal</th>
+                            <td><i class="fa fa-rupee-sign"></i> {{cart_data.total_cart_amount}}</td>
+                        </tr>
+                        <tr>
+                            <th>Tax</th>
+                            <td><i class="fa fa-rupee-sign"></i> {{cart.tax}} <span class="small">(18%)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <td> <b><i class="fa fa-rupee-sign"></i> {{cart_data.final_amount}}</b> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <form action="{% url 'billing_page' %}" >
+                    {% csrf_token %}
+                    <input type="hidden" name="amount" value="{{cart_data.final_amount}}">
+                    <button type="submit" value="submit" class="primary-btn">Place & Order</button>
+                    <!-- <a href="#" class="btn-second btn-submit full-width">Pay {{cart_data.final_amount}}</a> -->
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- tracking map -->
+{% endblock %}

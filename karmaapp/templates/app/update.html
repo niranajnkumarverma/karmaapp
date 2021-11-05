@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Profile</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="{% url 'index' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Profile</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Checkout Area =================-->
+<section class="checkout_area section_gap">
+    <div class="container">
+
+        <div class="billing_details">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Account Details</h3>
+                    {% for user in users %}
+                    <form class="row contact_form" novalidate="novalidate">
+                        {% csrf_token %}
+                        <div class="col-md-6 form-group p_star">
+                            <input type="text" class="form-control"  value="{{user.firstname}}" id="firstname" name="firstname">
+                            <span class="placeholder" data-placeholder="First name"></span>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <input type="text" class="form-control" value="{{user.lastname}}" id="lastname" name="lastname">
+                            <span class="placeholder" data-placeholder="Last name"></span>
+                        </div>
+                       
+                        <div class="col-md-6 form-group p_star">
+                            <input type="text" class="form-control" value="{{user.mobile}}" id="mobile" name="mobile">
+                            <span class="placeholder" data-placeholder="Phone number"></span>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <input type="text" class="form-control" value="{{user.address}}" id="address" name="address">
+                            <span class="placeholder" data-placeholder="Email Address"></span>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <input type="text" class="form-control" value="{{user.country}}" id="country" name="country">
+                            <span class="placeholder" data-placeholder="country"></span>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <input type="text" class="form-control" value="{{user.state}}"id="state" name="state">
+                            <span class="placeholder" data-placeholder="state"></span>
+                        </div>
+                       
+                        
+                        <div class="col-md-12 form-group p_star">
+                            <input type="text" class="form-control" value="{{user.city}}" id="city" name="city">
+                            <span class="placeholder" data-placeholder="Town/City"></span>
+                        </div>
+                        
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" value="{{user.pincode}}" id="pincode" name="pincode" placeholder="Postcode/ZIP">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="primary-btn">Edit</button>
+                            
+                        </div>
+                        {% enfor %}
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

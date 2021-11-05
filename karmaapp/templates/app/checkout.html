@@ -1,0 +1,107 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Shipping Address</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="#">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="{% url 'index' %}">Continoue Shoping</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<form action="{% url 'billing_page' %}" method="POST">
+    {% csrf_token %}
+    <div class="billing_details">
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="firstname" class="text-light-black fw-700">First Name </label>
+                    <input type="text" name="firstname" id="firstname" class="form-control form-control-submit"
+                        placeholder=" Enter First Name" required>
+                    <div class="invalid-feedback">Please enter your First Name.</div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="lastname" class="text-light-black fw-700">Last Name </label>
+                    <input type="text" name="lastname" id="lastname" class="form-control form-control-submit"
+                        placeholder=" Enter First Name" required>
+                    <div class="invalid-feedback">Please enter your Last Name.</div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="mobile" class="text-light-black fw-700">Mobile Number </label>
+                    <input type="text" name="mobile" id="mobile" class="form-control form-control-submit"
+                        placeholder=" Enter First Name" required>
+                    <div class="invalid-feedback">Please enter your Mobile Number.</div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="districk" class="text-light-black fw-700">Districk</label>
+                    <input type="text" name="districk" id="districk" class="form-control input-sm" maxlength="10"
+                        placeholder="Enter your Districk" required>
+                    <div class="invalid-feedback">Please enter your Districk.</div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="country" class="text-light-black fw-700">Country <sup class="fs-16"></sup>
+                    </label>
+                    <input type="text" class="form-control" id="country" name="country" placeholder="Enter country"
+                        required="">
+                    <div class="invalid-feedback">Please enter country.</div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="state" class="text-light-black fw-700">State</label>
+                    <input type="text" name="state" id="state" class="form-control input-sm" maxlength="10"
+                        placeholder="Enter your state" required>
+                    <div class="invalid-feedback">Please enter your state.</div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="city" class="text-light-black fw-700">City</label>
+                    <input type="text" name="city" id="city" class="form-control input-sm" maxlength="10"
+                        placeholder="Enter your city" required>
+                    <div class="invalid-feedback">Please enter your city.</div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="address" class="text-light-black fw-700">Address</label>
+                    <textarea name="address" id="address" placeholder=" Enter Full Address "
+                        class="form-control form-control-submit" required></textarea>
+                    <div class="invalid-feedback">Please enter your Address.</div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="pincode" class="text-light-black fw-700">Pincode</label>
+                    <input type="text" name="pincode" class="form-control form-control-submit"
+                        placeholder="Enter Pincode number" required>
+                    <div class="invalid-feedback">Please enter your pincode.</div>
+                </div>
+            </div>
+            <div>
+                 <button type="submit" value="submit" class="primary-btn">Submit</button>
+            </div>
+           
+        </div>
+
+    </div>
+</form>
+{% endblock %}
